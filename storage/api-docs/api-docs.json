@@ -1,0 +1,220 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Documentación con Swagger",
+        "description": "Documentación de la API de ejemplo",
+        "contact": {
+            "email": "soporte@miempresa.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/api",
+            "description": "Servidor API Principal"
+        }
+    ],
+    "paths": {
+        "/student": {
+            "get": {
+                "tags": [
+                    "Estudiantes"
+                ],
+                "summary": "Listado de estudiantes",
+                "description": "Retorna un listado de estudiantes",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "Listado de estudiantes"
+                    },
+                    "404": {
+                        "description": "No se encontraron estudiantes"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Estudiantes"
+                ],
+                "summary": "Crear un nuevo estudiante",
+                "description": "Registra un nuevo estudiante en el sistema.",
+                "operationId": "createStudent",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "phone",
+                                    "language"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Juan Pérez"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "juan.perez@example.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "1234567890"
+                                    },
+                                    "language": {
+                                        "type": "string",
+                                        "example": "Español"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Estudiante creado exitosamente"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    },
+                    "500": {
+                        "description": "Error al crear el estudiante"
+                    }
+                }
+            }
+        },
+        "/student/{id}": {
+            "get": {
+                "tags": [
+                    "Estudiantes"
+                ],
+                "summary": "Obtener un estudiante por ID",
+                "description": "Obtiene la información de un estudiante específico.",
+                "operationId": "getStudentById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del estudiante",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Estudiante encontrado"
+                    },
+                    "404": {
+                        "description": "No se encontró el estudiante"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Estudiantes"
+                ],
+                "summary": "Actualizar un estudiante",
+                "description": "Actualiza los datos de un estudiante existente.",
+                "operationId": "updateStudent",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del estudiante",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "phone",
+                                    "language"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Juan Pérez"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "juan.perez@example.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "1234567890"
+                                    },
+                                    "language": {
+                                        "type": "string",
+                                        "example": "Español"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Estudiante actualizado correctamente"
+                    },
+                    "404": {
+                        "description": "No se encontró el estudiante"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Estudiantes"
+                ],
+                "summary": "Eliminar un estudiante",
+                "description": "Elimina un estudiante del sistema.",
+                "operationId": "deleteStudent",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del estudiante",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Estudiante eliminado correctamente"
+                    },
+                    "404": {
+                        "description": "No se encontró el estudiante"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Estudiantes",
+            "description": "Estudiantes"
+        }
+    ]
+}
